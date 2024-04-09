@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>Streamflix | Sign In</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon_io/apple-touch-icon.png"><!-- Favicon set -->
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon_io/favicon-32x32.png"><!-- Favicon set -->
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon_io/favicon-16x16.png"><!-- Favicon set -->
+    <link rel="manifest" href="images/favicon_io/site.webmanifest">
+    <style>
+    /* Internal CSS Applied */
+#signin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 75vh;
+}
+
+#signin form {
+    text-align: center;
+}
+
+#signin form div {
+    max-width: 300px;
+}
+
+#signin form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#signin form input[type="text"],
+#signin form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+#signin form button {
+    padding: 10px 20px;
+    background-color: #e50914;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#signin form button:hover {
+    background-color: #9c1117;/* On hovering the mouse over the button the color changes to a darker shade */
+}
+
+#signin form input[type="checkbox"] {
+    margin-right: 5px;
+}
+    </style>
+</head>
+<body>
+    <header><!-- Header section - Opened -->
+        <div class="logo">Streamflix</div>
+  
+        <nav id="navbar"><!-- Navbar opened -->
+          <ul id="menu"><!-- ul = Unordered list - Opened -->
+            <li><a href="index.html">Home</a></li><!-- li = List Item -->
+  
+            <li class="dropdown">
+              <a href="#" class="dropbtn">TV Shows</a>
+              <div class="dropdown-content">
+                  <ul class="sub-menu">
+                      <li><a href="tvshows.html#popular">Popular</a></li>
+                      <li><a href="tvshows.html#trendingNow">Trending Now</a></li>
+                  </ul>
+              </div>
+          </li>
+  
+          <li class="dropdown">
+            <a href="#" class="dropbtn">Movies</a>
+            <div class="dropdown-content">
+                <ul class="sub-menu">
+                    <li><a href="movies.html#popularMovies">Popular</a></li>
+                    <li><a href="movies.html#trendingNowMovies">Trending Now</a></li>
+                </ul>
+            </div>
+          </li>
+            <li><a href="newandpopular.html">New & Popular</a></li>
+            <!-- li = List Item -->
+            <li><a href="mylist.html">My List</a></li>
+            <!-- li = List Item -->
+            <li><a href="browsebylanguages.html">Browse by Languages</a></li>
+            <!-- li = List Item -->
+            <li><a href="#">Sign in</a></li>
+            <!-- li = List Item -->
+          </ul>
+          <!-- ul = Unordered list - Closed -->
+        </nav>
+        <!-- Navbar closed -->
+      </header>
+      <!-- Header section - Closed -->
+
+    <section id="signin">
+            <form id="loginForm" action="#" method="post">
+            <h2>Sign In</h2> 
+        <div>   
+            <label>Username : </label>   
+            <input type="text" placeholder="Enter Username" name="username" required><br><br>
+            <label>Password : </label>   
+            <input type="password" placeholder="Enter Password" name="password" required><br><br>  
+            <button type="submit" value="Login">Login</button><br><br>
+            Don't have an account? <a href="signup.html">Sign up here!</a>   
+        </div>   
+    </form>
+    <footer>
+        <div>
+            <p>&copy; 2024 Streamflix. All rights reserved.</p>
+        </div>
+    </footer>
+    <script>
+        function submitLoginForm(event) {
+            event.preventDefault(); // Prevent default form submission
+            
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            // Create an object with username and password
+            var formData = {
+                username: username,
+                password: password
+            };
+
+            // Send AJAX request to the backend for authentication
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/authenticate", true);
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        // Authentication successful, redirect to the appropriate page
+                        window.location.href = "/dashboard";
+                    } else {
+                        // Authentication failed, display an error message
+                        alert("Incorrect username or password. Please try again.");
+                    }
+                }
+            };
+            xhr.send(JSON.stringify(formData));
+        }
+    </script>
+</body><!-- Body tag closed -->
+</html><!-- Html tag closed -->
